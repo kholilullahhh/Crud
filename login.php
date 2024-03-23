@@ -26,7 +26,7 @@ if (isset($_POST['login'])) {
         $query = "SELECT * FROM tablelogin WHERE login_id = '$login_id'";
         $result = mysqli_query($connection,$query);
         while ($row = mysqli_fetch_array($result)) {
-            $akses[] = $row['akses_id']; //spp, guru, siswa
+            $akses[] = $row['akses_id']; 
         }
         if (empty($akses)) {
             $err .= "<li>Kamu tidak punya akses ke halaman admin</li>";
