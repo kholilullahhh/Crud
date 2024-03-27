@@ -1,45 +1,52 @@
 <?php
-// session_start();
-if (isset($_SESSION['admin_username'])) {
-    header("location:index.php");
-}
+session_start(); // Start the session
+
 include("koneksi.php");
+
 $username = "";
 $password = "";
 $err = "";
+
 if (isset($_POST['login'])) {
-    $username   = $_POST['username'];
-    $password   = $_POST['password'];
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
     if ($username == '' or $password == '') {
         $err .= "<li>Silakan masukkan username dan password</li>";
     }
+
     if (empty($err)) {
         $query = "SELECT * FROM tablelogin WHERE username = '$username'";
         $result = mysqli_query($connection, $query);
-        $row = mysqli_fetch_array($result);
-        if ($row['password'] != md5($password)) {
+
+        if (mysqli_num_rows($result) == 1) {
+            $row = mysqli_fetch_assoc($result);
+
+            if ($row['password'] == md5($password)) {
+                $login_id = $row['login_id'];
+                $akses = $row['akses']; // Assuming 'admin_akses' is the column for access level
+
+                $_SESSION['login_id'] = $login_id;
+                $_SESSION['username'] = $username;
+                $_SESSION['akses'] = $akses;
+
+                if ($akses == 'admin_akses') {
+                    header("location:index.php"); // Redirect to admin page
+                    exit();
+                } elseif ($akses == 'user_akses') {
+                    header("location:indexuser.php"); // Redirect to user page
+                    exit();
+                }
+            } else {
+                $err .= "<li>Password salah</li>";
+            }
+        } else {
             $err .= "<li>Akun tidak ditemukan</li>";
         }
     }
-    if (empty($err)) {
-        $login_id = $row['login_id'];
-        $query = "SELECT * FROM tablelogin WHERE login_id = '$login_id'";
-        $result = mysqli_query($connection,$query);
-        while ($row = mysqli_fetch_array($result)) {
-            $akses[] = $row['akses_id']; 
-        }
-        if (empty($akses)) {
-            $err .= "<li>Kamu tidak punya akses ke halaman admin</li>";
-        }
-    }
-    if (empty($err)) {
-        $_SESSION['admin_username'] = $username;
-        $_SESSION['admin_akses'] = $akses;
-        header("location:index.php");
-        exit();
-    }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
