@@ -1,3 +1,10 @@
+<?php 
+session_start(); // Start the session
+if ( !isset($_SESSION["login"]) ){
+    header("location:login.php");
+    exit();
+}
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -32,6 +39,7 @@
                 </thead>
                 <tbody>
                   <?php 
+                  $_SESSION["login"] = true;
                       include('koneksi.php');
                       $no = 1;
                       $query = mysqli_query($connection,"SELECT * FROM tablemahasiswa");

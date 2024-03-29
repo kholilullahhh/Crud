@@ -1,5 +1,4 @@
-<?php
-
+<?php 
 //include koneksi database
 include('koneksi.php');
 

@@ -1,6 +1,10 @@
 <?php
 session_start(); // Start the session
 
+if ( isset($_SESSION["login"]) ){
+    header("location:index.php");
+    exit();
+}
 include("koneksi.php");
 
 $username = "";
@@ -26,6 +30,7 @@ if (isset($_POST['login'])) {
                 $login_id = $row['login_id'];
                 $akses = $row['akses']; // Assuming 'admin_akses' is the column for access level
 
+                $_SESSION['login'] = true;
                 $_SESSION['login_id'] = $login_id;
                 $_SESSION['username'] = $username;
                 $_SESSION['akses'] = $akses;

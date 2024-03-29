@@ -1,5 +1,9 @@
 <?php 
-  
+session_start(); // Start the session
+//   if ( !isset($_SESSION ["login"]) ){
+//     header("location:login.php");
+//     exit();
+// }
   include('koneksi.php');
   
   $id = $_GET['id'];
