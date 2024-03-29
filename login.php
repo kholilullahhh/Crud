@@ -70,6 +70,7 @@ if (isset($_POST['login'])) {
             <input type="text" value="<?php echo $username ?>" name="username" class="input" placeholder="Isikan Username..." /><br /><br />
             <input type="password" name="password" class="input" placeholder="Isikan Password" /><br /><br />
             <input type="submit" name="login" value="Masuk Ke Sistem" />
+            <a href="registrasi.php">REGISTRESI</a>
         </form>
     </div>
 </body>
