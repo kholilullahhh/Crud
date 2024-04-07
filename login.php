@@ -1,7 +1,7 @@
 <?php
 session_start(); // Start the session
 
-if ( isset($_SESSION["login"]) ){
+if (isset($_SESSION["login"])) {
     header("location:index.php");
     exit();
 }
@@ -34,14 +34,7 @@ if (isset($_POST['login'])) {
                 $_SESSION['login_id'] = $login_id;
                 $_SESSION['username'] = $username;
                 $_SESSION['akses'] = $akses;
-
-                if ($akses == 'admin_akses') {
-                    header("location:index.php"); // Redirect to admin page
-                    exit();
-                } elseif ($akses == 'user_akses') {
-                    header("location:indexuser.php"); // Redirect to user page
-                    exit();
-                }
+                header("location:index.php");
             } else {
                 $err .= "<li>Password salah</li>";
             }
