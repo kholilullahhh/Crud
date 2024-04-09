@@ -15,7 +15,7 @@ $query = "INSERT INTO tablemahasiswa (nama, nim, jurusan) VALUES ('$nama', '$nim
 if($connection->query($query)) {
 
     //redirect ke halaman index.php 
-    header("location: index.php");
+    echo '<script type="text/javascript"> alert("Data berhasil di Update"); window.location.href = "index.php"; </script>';
 
 } else {
 

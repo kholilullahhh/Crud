@@ -14,7 +14,8 @@ $query = "UPDATE tablemahasiswa SET nim = '$nim', nama = '$nama', jurusan = '$ju
 //kondisi pengecekan apakah data berhasil diupdate atau tidak
 if($connection->query($query)) {
     //redirect ke halaman index.php 
-    header("location: index.php");
+    echo '<script type="text/javascript"> alert("Data berhasil di Update"); window.location.href = "index.php"; </script>';
+
 } else {
     //pesan error gagal update data
     echo "Data Gagal Diupate!";

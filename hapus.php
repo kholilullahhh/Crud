@@ -12,7 +12,7 @@ $id = $_GET['id'];
 $query = "DELETE FROM tablemahasiswa WHERE id = '$id'";
 
 if($connection->query($query)) {
-    header("location: index.php");
+    echo '<script type="text/javascript"> confirm("Yakin ingin menghapus data"); window.location.href = "index.php"; </script>';
 } else {
     echo "DATA GAGAL DIHAPUS!";
 }
